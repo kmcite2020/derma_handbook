@@ -7,11 +7,12 @@ import '../diseases/diseases_providers.dart';
 
 part 'search.g.dart';
 
-final searchBloc = SearchBloc();
-
 @JsonSerializable()
 @CopyWith()
 class Search {
+  toJson() => _$SearchToJson(this);
+  factory Search.fromJson(Map<String, dynamic> json) => _$SearchFromJson(json);
+
   final SearchMode searchMode;
   final String search;
   const Search({
@@ -22,12 +23,12 @@ class Search {
     return switch (searchMode) {
       SearchMode.contains => diseases
           .where(
-            (element) => element.name.contains(search),
+            (element) => element.name.toLowerCase().contains(search),
           )
           .toList(),
       SearchMode.startsWith => diseases
           .where(
-            (eachDisease) => eachDisease.name.startsWith(search),
+            (eachDisease) => eachDisease.name.toLowerCase().startsWith(search),
           )
           .toList(),
     };
@@ -43,16 +44,12 @@ enum SearchMode {
   startsWith;
 }
 
-class SearchBloc {
-  final searchRM = RM.inject(() => const Search());
+final searchRM = RM.inject(() => Search());
+Search get searchModel => searchRM.state;
+void setSearchModel(Search searchModel) => searchRM.state = searchModel;
 
-  Search get searchModel => searchRM.state;
+void setSearchMode(SearchMode searchMode) =>
+    setSearchModel(searchModel.copyWith.searchMode(searchMode));
 
-  void setSearchModel(Search searchModel) => searchRM.state = searchModel;
-
-  void setSearchMode(SearchMode searchMode) =>
-      setSearchModel(searchModel.copyWith.searchMode(searchMode));
-
-  void setSearchText(String search) =>
-      setSearchModel(searchModel.copyWith.search(search));
-}
+void setSearchText(String search) =>
+    setSearchModel(searchModel.copyWith.search(search));

@@ -37,6 +37,8 @@ class Backup {
 
   @ignore
   bool get isBackupHappened => files.isNotEmpty;
+  toJson() => _$BackupToJson(this);
+  factory Backup.fromJson(json) => _$BackupFromJson(json);
 }
 
 enum BackupStatus {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import '../core/router.dart';
 import '../diseases/pages/diseases.dart';
-import '../search/search_page.dart';
+import '../search/pages/search.dart';
 import '../settings/settings_page.dart';
 
 class HomePage extends ReactiveStatelessWidget {
@@ -47,7 +47,7 @@ class MyDrawer extends ReactiveStatelessWidget {
           SizedBox(height: 5),
           NavigationDrawerDestination(
             icon: Icon(Icons.local_hospital),
-            label: 'All Diseases'.text(),
+            label: 'Diseases'.text(),
           ),
           SizedBox(height: 5),
           NavigationDrawerDestination(

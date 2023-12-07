@@ -1,5 +1,4 @@
 import 'package:uuid/uuid.dart' show Uuid;
 
-const appTitle = 'RX - Skin';
-// ignore: prefer_const_constructors
+const appTitle = 'DERMA - HANDBOOK';
 String get randomID => Uuid().v1();

@@ -15,6 +15,9 @@ class Password {
     this.isPasswordVisible = false,
     this.isAddDiseaseVisible = false,
   });
+
+  factory Password.fromJson(json) => _$PasswordFromJson(json);
+  toJson() => _$PasswordToJson(this);
 }
 
 final passwordBloc = PasswordManager();

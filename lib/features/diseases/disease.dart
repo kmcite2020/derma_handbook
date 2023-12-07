@@ -36,10 +36,6 @@ class Disease {
 class DiseasesBloc {
   void addDisease(Disease disease) => addDisease(disease);
 
-  void removeDisease(Disease disease) => removeDisease(disease);
-
-  void removeAllDiseases() => removeAllDiseases();
-
   updateImageOfDisease(Uint8List image, Disease diseaseModel) {
     addDisease(diseaseModel.copyWith(image: image));
   }

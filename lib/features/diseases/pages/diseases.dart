@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import '../../settings/settings.dart';
-import '../disease.dart';
 import '../diseases_providers.dart';
 import '../components/disease_tile.dart';
 
@@ -20,10 +19,7 @@ class DiseasesPage extends ReactiveStatelessWidget {
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         itemCount: diseases.length,
-        itemBuilder: (context, index) {
-          final Disease disease = diseases[index];
-          return DiseaseTile(id: disease.id);
-        },
+        itemBuilder: (context, index) => diseaseTile(diseases[index].id),
       ),
     );
   }

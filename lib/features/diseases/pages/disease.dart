@@ -18,15 +18,10 @@ class DiseasePage extends ReactiveStatelessWidget {
     required this.id,
   });
   final int id;
-  @override
-  void didMountWidget(BuildContext context) {
-    super.didMountWidget(context);
-  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return DiseaseBuilder(
       id: id,
       builder: (BuildContext context, Disease disease) {
@@ -42,7 +37,7 @@ class DiseasePage extends ReactiveStatelessWidget {
                 Opacity(
                   opacity: .6,
                   child: Image.memory(
-                    disease.image as Uint8List,
+                    Uint8List.fromList(disease.image!),
                     fit: BoxFit.fill,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
@@ -86,7 +81,7 @@ class DiseasePage extends ReactiveStatelessWidget {
           );
         }
         return GestureDetector(
-          onDoubleTap: () => Navigator.pop(context),
+          onDoubleTap: navigator.back,
           child: Scaffold(
             appBar: AppBar(
               title: disease.name.toUpperCase().text(),
@@ -104,7 +99,7 @@ class DiseasePage extends ReactiveStatelessWidget {
                 child: (disease).image == null
                     ? null
                     : Image.memory(
-                        disease.image as Uint8List,
+                        Uint8List.fromList(disease.image!),
                         fit: BoxFit.fill,
                         height: size.height,
                         width: size.width,

@@ -33,6 +33,9 @@ class Settings {
     this.headlineTextSize = 1.2,
     this.pageIndex = 0,
   });
+  toJson() => _$SettingsToJson(this);
+  factory Settings.fromJson(Map<String, dynamic> json) =>
+      _$SettingsFromJson(json);
 }
 
 class MaterialColorConverter implements JsonConverter<MaterialColor, int> {

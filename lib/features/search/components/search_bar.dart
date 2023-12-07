@@ -2,10 +2,10 @@ import 'package:derma_handbook/features/core/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
-import '../settings/settings.dart';
-import 'search.dart';
+import '../../settings/settings.dart';
+import '../search.dart';
 
-final searchTxt = RM.injectTextEditing(text: searchBloc.searchModel.search);
+final searchTextRM = RM.injectTextEditing(text: searchModel.search);
 
 class SearchBarWidget extends ReactiveStatelessWidget {
   const SearchBarWidget({super.key});
@@ -14,10 +14,12 @@ class SearchBarWidget extends ReactiveStatelessWidget {
   Widget build(BuildContext context) {
     return SearchBar(
       leading: const Icon(Icons.search).pad(),
-      focusNode: searchTxt.focusNode,
+      focusNode: searchTextRM.focusNode,
       hintText: 'Enter name to search',
-      controller: searchTxt.controller,
-      onChanged: searchBloc.setSearchText,
+      controller: searchTextRM.controller,
+      onChanged: (String search) => setSearchModel(
+        searchModel.copyWith.search(search.toLowerCase()),
+      ),
       shape: MaterialStatePropertyAll(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
@@ -25,6 +27,7 @@ class SearchBarWidget extends ReactiveStatelessWidget {
           ),
         ),
       ),
+      elevation: MaterialStatePropertyAll(40),
     ).pad();
   }
 }

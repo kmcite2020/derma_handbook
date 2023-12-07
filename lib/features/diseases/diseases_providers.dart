@@ -36,4 +36,8 @@ abstract class DiseasesMutations {
 
   static void removeAllDiseases() =>
       isar.write((isar) => isar.diseases.clear());
+
+  static void addDisease(Disease disease) {
+    isar.write((isar) => isar.diseases.put(disease));
+  }
 }
